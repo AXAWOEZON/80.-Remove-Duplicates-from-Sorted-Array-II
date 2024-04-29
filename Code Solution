@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        [=]() { // Creating a lambda expression to make the code run faster
+            ios_base::sync_with_stdio(false); 
+            cin.tie(nullptr); 
+            cout.tie(nullptr); 
+            }();
+
+        if (nums.empty()) // if nums is empty
+            return 0; // return 0
+
+        int k = 0; // creating the first pointer
+
+        int n = 1; // creating the second pointer
+
+        for (int i = 1; i < nums.size(); i++) { // looping through the array using a for loop
+            if (nums[k] != nums[i]) { // if the element at the first pointer is not equal to the element at index i
+                k++; // increment the first pointer
+                nums[k] = nums[i]; // assign the element at index i to the position of the first pointer
+                n = 1; // reset the second pointer to 1
+            }
+            else { // otherwise
+                if (n < 2) { // if the second pointer is less than 2 to ensure each unique element appears no more than twice
+                    k++; // increment the first pointer
+                    nums[k] = nums[i]; // assign the element at index i to the position of the first pointer
+                    n++; // increment the second pointer by 1
+                }
+            }
+        }
+        return k + 1; // alternatively, return k + n; depending on preference
+    }
+};
+int main()
+{
+    Solution s;
+
+    vector<int> v{ 1,1,1,2,2,3 };
+
+    cout << s.removeDuplicates(v);
+
+    return 0;
+}
